@@ -135,6 +135,13 @@ zone "{{ bind_zone.name }}" IN {
 {% else %}
   allow-update { none; };
 {% endif %}
+{% if bind_zone.forwarders is defined %}
+  {% if bind_zone.forwarders | length == 0 %}
+  forwarders {};
+  {% else %}
+  forwarders { {{ bind_zone.forwarders|join('; ') }}; };
+  {% endif %}
+{% endif %}
 {% elif _type == 'secondary' %}
   type slave;
   masters { {{ bind_zone.primaries|join('; ') }}; };
