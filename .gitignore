@@ -24,3 +24,6 @@ docker-tests/
 
 # Ignore Ansible fact cache
 .cache/
+
+#Ignore Local History directory
+/.lh
